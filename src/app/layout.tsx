@@ -20,7 +20,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <div className="bg-slate-50">
           <Header/>
-          <div className="h-20"></div>
+          <div className="h-16"></div>
           {children}
         </div>
       </body>
