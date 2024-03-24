@@ -40,3 +40,55 @@ export const answers =[
         answer: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas eaque nobis, fugit odit omnis fugiat deleniti animi ab maxime cum laboriosam recusandae facere dolorum veniam quia pariatur obcaecati illo ducimus"
     },
 ]
+
+
+export const sessionItems = [
+    {
+        name: "Liam James",
+        giversemail: "liamjames@example.com",
+        receiversemail: "liamjames@example.com",
+        company: "Google",
+        date: "12 Jan 2023",
+        status: "Active",
+    },
+    {
+        name: "Liam James",
+        giversemail: "liamjames@example.com",
+        receiversemail: "liamjames@example.com",
+        company: "Google",
+        date: "12 Jan 2023",
+        status: "Not Active",
+    },
+    {
+        name: "Liam James",
+        giversemail: "liamjames@example.com",
+        receiversemail: "liamjames@example.com",
+        company: "Google",
+        date: "12 Jan 2023",
+        status: "Not Active",
+    },
+    {
+        name: "Liam James",
+        giversemail: "liamjames@example.com",
+        receiversemail: "liamjames@example.com",
+        company: "Google",
+        date: "12 Jan 2023",
+        status: "Active",
+    },
+    {
+        name: "Liam James",
+        giversemail: "liamjames@example.com",
+        receiversemail: "liamjames@example.com",
+        company: "Google",
+        date: "12 Jan 2023",
+        status: "Not Active",
+    },
+    {
+        name: "Liam James",
+        giversemail: "liamjames@example.com",
+        receiversemail: "liamjames@example.com",
+        company: "Google",
+        date: "12 Jan 2023",
+        status: "Active",
+    },
+]
