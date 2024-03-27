@@ -21,6 +21,7 @@ model User {
   lastName  String?
   email     String  @unique
   phone     String?
+  imageUrl  String?
   about     String?
   resumeUrl String?
 
