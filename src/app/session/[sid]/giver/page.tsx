@@ -6,10 +6,7 @@ import { answers } from "../../../../../constants";
 import * as Dialog from "@radix-ui/react-dialog";
 
 const Session = () => {
-
-
-    const [gotThankYouNote, setGotThankYouNote] = useState(false);
-
+  const [gotThankYouNote, setGotThankYouNote] = useState(false);
 
   const [approved, setApproved] = useState(false);
 
@@ -17,28 +14,29 @@ const Session = () => {
     setApproved(!approved);
   };
 
-
   return (
     <section className="bg-white dark:bg-gray-900">
       <div className="container max-w-4xl px-6 py-10 mx-auto">
         {gotThankYouNote ? (
           <>
             <h1 className="text-2xl font-semibold text-center text-gray-800 lg:text-3xl dark:text-white">
-              Yey, you've got a Thank you note!
+              Yey, you&apos;ve got a Thank you note!
             </h1>
-            <div
-                    className="my-5 border-2 border-gray-100 rounded-lg dark:border-gray-700"
-                  >
-                    <span className="flex items-center justify-between w-full p-8">
-                      <h1 className="font-semibold text-gray-700 dark:text-white">
-                        Thank you note
-                      </h1>
-                    </span>
-                    <hr className="border-gray-200 dark:border-gray-700" />
-                    <p className="p-8 text-sm text-gray-500 dark:text-gray-300">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores nesciunt neque similique asperiores nostrum, animi non dolor vitae eius nam. Doloribus pariatur, sint quibusdam perspiciatis explicabo quos reiciendis! Earum architecto minus ipsam dicta ex ad, maxime rem laboriosam iusto. Quas!
-                    </p>
-                  </div>
+            <div className="my-5 border-2 border-gray-100 rounded-lg dark:border-gray-700">
+              <span className="flex items-center justify-between w-full p-8">
+                <h1 className="font-semibold text-gray-700 dark:text-white">
+                  Thank you note
+                </h1>
+              </span>
+              <hr className="border-gray-200 dark:border-gray-700" />
+              <p className="p-8 text-sm text-gray-500 dark:text-gray-300">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+                nesciunt neque similique asperiores nostrum, animi non dolor
+                vitae eius nam. Doloribus pariatur, sint quibusdam perspiciatis
+                explicabo quos reiciendis! Earum architecto minus ipsam dicta ex
+                ad, maxime rem laboriosam iusto. Quas!
+              </p>
+            </div>
           </>
         ) : (
           <>

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
@@ -17,7 +18,7 @@ export default function Footer() {
   return (
     <footer className="text-gray-500 bg-white px-4 py-5 max-w-screen-2xl mx-auto md:px-8 border-t-2 border-gray-200 pt-10">
       <div className="max-w-lg sm:mx-auto sm:text-center">
-        <img src="/logo.png" className="w-80 sm:mx-auto py-5" />
+        <Image width={320} height={100} alt="logo" src="/logo.png" className="w-80 sm:mx-auto py-5" />
         <p className="leading-relaxed mt-2 text-[15px] font-bold">
           Simplifying Connections, Accelerating Careers
         </p>
@@ -30,12 +31,12 @@ export default function Footer() {
         <div className="mt-6 sm:mt-0">
           <ul className="flex items-center space-x-4">
             {footerNavs.map((item, idx) => (
-                <li key={idx} className=" hover:text-gray-800">
-                    <Link key={idx} href={item.href}>
-                    {item.name}
-                    </Link>
-                </li>
-                ))}
+              <li key={idx} className=" hover:text-gray-800">
+                <Link key={idx} href={item.href}>
+                  {item.name}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

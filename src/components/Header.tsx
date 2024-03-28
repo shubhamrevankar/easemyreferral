@@ -125,7 +125,7 @@ export default function Header() {
                     className="h-12 w-auto hidden sm:block"
                     src="/logo.png"
                     alt="Your Company"
-                    />
+                  />
                   <img
                     className="h-12 w-auto sm:hidden"
                     src="/logo-mobile.png"
