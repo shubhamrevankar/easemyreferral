@@ -8,7 +8,7 @@ import { useUser } from "@clerk/nextjs";
 
 import { usePathname, useSearchParams } from "next/navigation";
 import { SignOutButton } from "@clerk/nextjs";
-import UserContext from "@/contexts/UserContext";
+// import UserContext from "@/contexts/UserContext";
 
 // const navigation = [
 //   { name: 'Home', href: `/`, current: true },
@@ -20,9 +20,9 @@ function classNames(...classes: string[]) {
 }
 
 export default function Header() {
-  const demoUser = useContext(UserContext);
+  // const demoUser = useContext(UserContext);
 
-  console.log(demoUser);
+  // console.log(demoUser);
 
   const { isLoaded, isSignedIn, user } = useUser();
 
@@ -31,6 +31,7 @@ export default function Header() {
   const [navigation, setNavigation] = useState([
     { name: "Home", href: `/`, current: true },
     { name: "Sessions", href: `/profile/${2}/sessions`, current: false },
+    { name: "AboutUs", href: `/aboutus`, current: false },
   ]);
 
   const pathname = usePathname();
@@ -52,9 +53,25 @@ export default function Header() {
           }
         })
       );
+    } else if (pathname == "/aboutus") {
+      setNavigation(
+        navigation.map((n) => {
+          if (n.name == "AboutUs") {
+            return {
+              ...n,
+              current: true,
+            };
+          } else {
+            return {
+              ...n,
+              current: false,
+            };
+          }
+        })
+      );
     } else {
       let regex = /\/profile\/(\d+)\/sessions/;
-      let match = pathname.match(regex);
+      let match = pathname?.match(regex);
       if (match) {
         setNavigation(
           navigation.map((n) => {
@@ -85,7 +102,7 @@ export default function Header() {
   }, [pathname, searchParams]);
 
   return (
-    <Disclosure as="nav" className="bg-white w-full fixed">
+    <Disclosure as="nav" className="bg-white w-full fixed z-50">
       {({ open }: { open: any }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -105,8 +122,13 @@ export default function Header() {
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <Link href="/" className="flex flex-shrink-0 items-center">
                   <img
-                    className="h-12 w-auto"
+                    className="h-12 w-auto hidden sm:block"
                     src="/logo.png"
+                    alt="Your Company"
+                    />
+                  <img
+                    className="h-12 w-auto sm:hidden"
+                    src="/logo-mobile.png"
                     alt="Your Company"
                   />
                 </Link>
@@ -119,7 +141,7 @@ export default function Header() {
                         className={classNames(
                           item.current
                             ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                            : "text-gray-400 hover:bg-gray-700 hover:text-white",
                           "rounded-md px-3 py-2 text-sm font-medium"
                         )}
                         aria-current={item.current ? "page" : undefined}
@@ -210,9 +232,8 @@ export default function Header() {
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pb-3 pt-2">
               {navigation.map((item) => (
-                <Disclosure.Button
+                <Link
                   key={item.name}
-                  as="a"
                   href={item.href}
                   className={classNames(
                     item.current
@@ -223,7 +244,7 @@ export default function Header() {
                   aria-current={item.current ? "page" : undefined}
                 >
                   {item.name}
-                </Disclosure.Button>
+                </Link>
               ))}
             </div>
           </Disclosure.Panel>

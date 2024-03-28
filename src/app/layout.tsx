@@ -7,6 +7,7 @@ import Loading from "./loading";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ApolloProviders } from "@/providers/ApolloProvider";
 import UserProvider from "@/providers/UserProvider";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,6 +38,7 @@ export default function RootLayout({
                 <Header />
                 <div className="h-16"></div>
                 <Suspense fallback={<Loading />}>{children}</Suspense>
+                <Footer />
               </div>
             </body>
           </UserProvider>

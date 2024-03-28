@@ -15,19 +15,19 @@ interface UserProviderProps {
 }
 
 const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
-  const { data, loading, error } = useQuery(GET_USER, {
-    variables: { email: "test@test.com" },
-  });
+  // const { data, loading, error } = useQuery(GET_USER, {
+  //   variables: { email: "test@test.com" },
+  // });
 
   const [user, setUser] = useState<User>({
     user: null,
   });
 
-  useEffect(() => {
-    if (!loading) {
-      setUser(data);
-    }
-  }, [loading]);
+  // useEffect(() => {
+  //   if (!loading) {
+  //     setUser(data);
+  //   }
+  // }, [loading]);
 
   return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 };
