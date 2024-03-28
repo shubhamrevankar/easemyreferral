@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id String @id @default(uuid())
+
+  firstName String
+  lastName  String?
+  email     String  @unique
+  phone     String?
+  imageUrl  String?
+  about     String?
+  resumeUrl String?
+
+  companyId String?
+  company   Company? @relation(fields: [companyId], references: [id])
+
+  clerkId String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  giverSessions    Session[] @relation("giverRelation")
+  receiverSessions Session[] @relation("receiverRelation")
+}
+
+model Session {
+  id String @id @default(uuid())
+
+  approved     Boolean @default(false)
+  status       Status  @default(ACTIVE)
+  companyId    String
+  company      Company @relation(fields: [companyId], references: [id])
+  formResponse Json?
+
+  giverUserId    String?
+  GiverUser      User?   @relation("giverRelation", fields: [giverUserId], references: [id])
+  receiverUserId String?
+  ReceiverUser   User?   @relation("receiverRelation", fields: [receiverUserId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Company {
+  id        String    @id @default(uuid())
+  name      String    @unique
+  questions Json?
+  User      User[]
+  Session   Session[]
+}
+
+enum Status {
+  NOTACTIVE
+  ACTIVE
+}
