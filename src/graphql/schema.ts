@@ -46,18 +46,21 @@ export const typeDefs = `#graphql
     }
     type Query {
         user(email: String!): User
-        getSession(id: ID!): Session
-        getCompany(id: ID!): Company
-        listUsers: [User!]!
-        listSessions: [Session!]!
-        listCompanies: [Company!]!
+        session(id: ID!): Session
+        company(id: ID!): Company
+        users: [User!]!
+        sessions: [Session!]!
+        companies: [Company!]!
       }
       
       type Mutation {
-        createUser(input: CreateUserInput!): User!
+        createUser(input: UserInput!): User!
+        updateUser(input: UserInput!): User!
+        createSession(input: SessionInput!): Session!
+        updateSession(input: SessionInput!): Session!
       }
       
-      input CreateUserInput {
+      input UserInput {
         firstName: String!
         lastName: String
         email: String!
@@ -67,5 +70,15 @@ export const typeDefs = `#graphql
         resumeUrl: String
         companyId: String
         clerkId: String!
+      }
+
+      input SessionInput {
+        id: ID
+        approved: Boolean
+        status: Status
+        companyId: String!
+        formResponse: String
+        giverUserId: String!
+        receiverUserId: String!
       }
 `;
