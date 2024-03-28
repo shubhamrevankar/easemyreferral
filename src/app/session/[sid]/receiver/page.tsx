@@ -181,7 +181,7 @@ export default function Session() {
                 </div>
 
                 {questions?.map((q, index) => (
-                  <div className="sm:col-span-6">
+                  <div key={index} className="sm:col-span-6">
                     <label
                       htmlFor="last-name"
                       className="block text-sm font-medium leading-6 text-gray-900"
