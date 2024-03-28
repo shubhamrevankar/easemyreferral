@@ -30,7 +30,7 @@ export default function Footer() {
         <div className="mt-6 sm:mt-0">
           <ul className="flex items-center space-x-4">
             {footerNavs.map((item, idx) => (
-                <li className=" hover:text-gray-800">
+                <li key={idx} className=" hover:text-gray-800">
                     <Link key={idx} href={item.href}>
                     {item.name}
                     </Link>
