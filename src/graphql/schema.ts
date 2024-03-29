@@ -54,23 +54,43 @@ export const typeDefs = `#graphql
       }
       
       type Mutation {
-        createUser(input: UserInput!): User!
-        updateUser(input: UserInput!): User!
+        createUser(
+          firstName: String!,
+          lastName: String,
+          email: String!,
+          phone: String,
+          imageUrl: String,
+          about: String,
+          resumeUrl: String,
+          companyId: String,
+          clerkId: String!
+        ): User!
+        updateUser(
+          firstName: String!,
+          lastName: String,
+          email: String!,
+          phone: String,
+          imageUrl: String,
+          about: String,
+          resumeUrl: String,
+          companyId: String,
+          clerkId: String!
+        ): User!
         createSession(input: SessionInput!): Session!
         updateSession(input: SessionInput!): Session!
       }
       
-      input UserInput {
-        firstName: String!
-        lastName: String
-        email: String!
-        phone: String
-        imageUrl: String
-        about: String
-        resumeUrl: String
-        companyId: String
-        clerkId: String!
-      }
+      # input UserInput {
+      #   firstName: String!,
+      #   lastName: String,
+      #   email: String!,
+      #   phone: String,
+      #   imageUrl: String,
+      #   about: String,
+      #   resumeUrl: String,
+      #   companyId: String,
+      #   clerkId: String!
+      # }
 
       input SessionInput {
         id: ID
