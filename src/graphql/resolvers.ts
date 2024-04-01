@@ -61,7 +61,7 @@ export const resolvers = {
 			});
 		},
 		company: async (parent: any, _args: any, context: Context) => {
-			return await context.prisma.session.findUnique({
+			return await context.prisma.company.findUnique({
 				where: {
 					id: parent.companyId,
 				},
@@ -70,21 +70,21 @@ export const resolvers = {
 	},
 	Session: {
 		GiverUser: async (parent: any, _args: any, context: Context) => {
-			return await context.prisma.session.findUnique({
+			return await context.prisma.user.findUnique({
 				where: {
 					id: parent.giverUserId,
 				},
 			});
 		},
 		ReceiverUser: async (parent: any, _args: any, context: Context) => {
-			return await context.prisma.session.findUnique({
+			return await context.prisma.user.findUnique({
 				where: {
 					id: parent.receiverUserId,
 				},
 			});
 		},
 		company: async (parent: any, _args: any, context: Context) => {
-			return await context.prisma.session.findUnique({
+			return await context.prisma.company.findUnique({
 				where: {
 					id: parent.companyId,
 				},
@@ -110,14 +110,14 @@ export const resolvers = {
 	Mutation: {
 		// add user
 		createUser: async (_parent: any, args: any, context: Context) => {
-			// const registeredUser = await context.prisma.user.findUnique({
-			// 	where: {
-			// 		email: args.email,
-			// 	},
-			// });
-			// if(registeredUser){
-			// 	return registeredUser
-			// }
+			const registeredUser = await context.prisma.user.findUnique({
+				where: {
+					email: args.email,
+				},
+			});
+			if(registeredUser){
+				return registeredUser
+			}
 			return await context.prisma.user.create({
 				data: {
 					email: args.email,

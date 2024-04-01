@@ -18,7 +18,7 @@ interface UserProviderProps {
 const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const { isLoaded, isSignedIn, user } = useUser();
 
-  console.log(user);
+  // console.log(user);
 
   const [AddUser, { data }] = useMutation(ADD_USER);
 
@@ -28,7 +28,9 @@ const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
   useEffect(() => {
     if (isLoaded) {
-      // setCurrentuser(data);
+      setCurrentuser({
+        user:user
+      });
       AddUser({
         variables: {
           email: user?.primaryEmailAddress?.emailAddress,

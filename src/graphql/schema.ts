@@ -76,8 +76,20 @@ export const typeDefs = `#graphql
           companyId: String,
           clerkId: String!
         ): User!
-        createSession(input: SessionInput!): Session!
-        updateSession(input: SessionInput!): Session!
+        createSession(
+          companyId: String!
+          giverUserId: String!
+          receiverUserId: String!
+        ): Session!
+        updateSession(
+          id: ID!
+          approved: Boolean
+          status: Status
+          companyId: String
+          formResponse: String
+          giverUserId: String
+          receiverUserId: String
+        ): Session!
       }
       
       # input UserInput {
@@ -92,13 +104,13 @@ export const typeDefs = `#graphql
       #   clerkId: String!
       # }
 
-      input SessionInput {
-        id: ID
-        approved: Boolean
-        status: Status
-        companyId: String!
-        formResponse: String
-        giverUserId: String!
-        receiverUserId: String!
-      }
+      # input SessionInput {
+      #   id: ID
+      #   approved: Boolean
+      #   status: Status
+      #   companyId: String!
+      #   formResponse: String
+      #   giverUserId: String!
+      #   receiverUserId: String!
+      # }
 `;
