@@ -61,11 +61,13 @@ export const resolvers = {
 			});
 		},
 		company: async (parent: any, _args: any, context: Context) => {
-			return await context.prisma.company.findUnique({
-				where: {
-					id: parent.companyId,
-				},
-			});
+			if(parent.companyId)
+				return await context.prisma.company.findUnique({
+					where: {
+						id: parent.companyId,
+					},
+				});
+			else return null
 		},
 	},
 	Session: {
