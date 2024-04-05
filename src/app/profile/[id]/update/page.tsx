@@ -1,5 +1,6 @@
 "use client"
 
+import { useEdgeStore } from '@/lib/edgestore';
 import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -12,16 +13,44 @@ export default function UpdateProfile() {
         lastname: "",
         email: "",
         phone: "",
-        country: "",
-        about: ""
+        company: "",
+        about: "",
+        resumeUrl: ""
     });
 
     const [resume, setResume] = useState<File | null>(null);
 
-    const handleSave = () => {
-        console.log(profile)
-        if(resume) console.log(resume.name)
+    const { edgestore } = useEdgeStore();
+
+    const storeFile = async (resume: File) => {
+      const res = await edgestore.publicFiles.upload({
+        file: resume,
+        onProgressChange: (progress) => {
+          // you can use this to show a progress bar
+          // console.log(progress);
+        },
+      });
+      setProfile({...profile,resumeUrl:res.url})
     }
+
+    const handleSave = async () => {
+        console.log(profile)
+        if(resume){
+          await storeFile(resume)
+        }
+        console.log(profile)
+    }
+
+
+  //   {
+  //     "url": "https://files.edgestore.dev/mt5tm1sxvqi1hl3z/publicFiles/_public/b7606cb8-596e-4819-91bd-4a727556a698.pdf",
+  //     "thumbnailUrl": null,
+  //     "size": 709361,
+  //     "uploadedAt": "2024-04-05T10:37:36.288Z",
+  //     "path": {},
+  //     "pathOrder": [],
+  //     "metadata": {}
+  // }
 
 
   return (
@@ -106,7 +135,7 @@ export default function UpdateProfile() {
                   id="country"
                   name="country"
                   autoComplete="country-name"
-                  onChange={event => setProfile({...profile,firstname:event.target.value})}
+                  onChange={event => setProfile({...profile,company:event.target.value})}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                 >
                   <option>Unemployed</option>
@@ -130,6 +159,7 @@ export default function UpdateProfile() {
                   rows={3}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   defaultValue={''}
+                  onChange={event => setProfile({...profile,about:event.target.value})}
                 />
               </div>
               <p className="mt-3 text-sm leading-6 text-gray-600">Write a few sentences about yourself.</p>
