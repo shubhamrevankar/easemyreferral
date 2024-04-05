@@ -8,6 +8,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { ApolloProviders } from "@/providers/ApolloProvider";
 import UserProvider from "@/providers/UserProvider";
 import Footer from "@/components/Footer";
+import { EdgeStoreProvider } from "@/lib/edgestore";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,14 +34,16 @@ export default function RootLayout({
       <ClerkProvider>
         <ApolloProviders>
           <UserProvider>
-            <body className={inter.className}>
-              <div className="bg-slate-50 min-h-screen">
-                <Header />
-                <div className="h-16"></div>
-                <Suspense fallback={<Loading />}>{children}</Suspense>
-                <Footer />
-              </div>
-            </body>
+            <EdgeStoreProvider>
+              <body className={inter.className}>
+                <div className="bg-slate-50 min-h-screen">
+                  <Header />
+                  <div className="h-16"></div>
+                  <Suspense fallback={<Loading />}>{children}</Suspense>
+                  <Footer />
+                </div>
+              </body>
+            </EdgeStoreProvider>
           </UserProvider>
         </ApolloProviders>
       </ClerkProvider>
