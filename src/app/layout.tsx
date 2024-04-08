@@ -9,6 +9,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import UserProvider from "@/providers/UserProvider";
 import Footer from "@/components/Footer";
 import { EdgeStoreProvider } from "@/lib/edgestore";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -38,10 +39,11 @@ export default function RootLayout({
               <body className={inter.className}>
                 <div className="bg-slate-50 min-h-screen">
                   <Header />
-                  <div className="md:h-16"></div>
+                  <div className="h-16"></div>
                   <Suspense fallback={<Loading />}>{children}</Suspense>
                   <Footer />
                 </div>
+                <Toaster />
               </body>
             </EdgeStoreProvider>
           </UserProvider>

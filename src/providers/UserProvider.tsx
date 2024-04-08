@@ -20,7 +20,7 @@ const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   
   const { isLoaded, isSignedIn, user } = useUser();
 
-  console.log(user)
+  // console.log(user)
 
 //   {
 //     "pathRoot": "/me",
@@ -142,7 +142,20 @@ const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     }
   }, [isLoaded])
 
-  console.log(dbUser)
+  // console.log(dbUser)
+
+//   {
+//     "userId": "YzAyNzJlOTctY2Q0Yi00MmFjLTg2MmUtNmFiMzYyOTQxOTY3",
+//     "firstName": "Shubham",
+//     "lastName": "Revankar",
+//     "email": "shubhamsrevankar8668@gmail.com",
+//     "clerkId": "user_2eBlQZjtlUaiJ61FkarSxmZfeEA",
+//     "imageUrl": "",
+//     "phone": "",
+//     "company": "",
+//     "about": "",
+//     "resumeUrl": ""
+// }
 
   return <UserContext.Provider value={{user:dbUser}}>{children}</UserContext.Provider>;
 };
