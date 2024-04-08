@@ -5,7 +5,7 @@ import Header from "@/components/Header";
 import { Suspense } from "react";
 import Loading from "./loading";
 import { ClerkProvider } from "@clerk/nextjs";
-import { ApolloProviders } from "@/providers/ApolloProvider";
+// import { ApolloProviders } from "@/providers/ApolloProvider";
 import UserProvider from "@/providers/UserProvider";
 import Footer from "@/components/Footer";
 import { EdgeStoreProvider } from "@/lib/edgestore";
@@ -32,20 +32,20 @@ export default function RootLayout({
         />
       </head>
       <ClerkProvider>
-        <ApolloProviders>
+        {/* <ApolloProviders> */}
           <UserProvider>
             <EdgeStoreProvider>
               <body className={inter.className}>
                 <div className="bg-slate-50 min-h-screen">
                   <Header />
-                  <div className="h-16"></div>
+                  <div className="md:h-16"></div>
                   <Suspense fallback={<Loading />}>{children}</Suspense>
                   <Footer />
                 </div>
               </body>
             </EdgeStoreProvider>
           </UserProvider>
-        </ApolloProviders>
+        {/* </ApolloProviders> */}
       </ClerkProvider>
     </html>
   );

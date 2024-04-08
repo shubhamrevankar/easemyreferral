@@ -10,7 +10,7 @@ const Profile = () => {
 
   const { isLoaded, isSignedIn, user } = useUser();
 
-  // console.log(user)
+  console.log(user)
 
   const { push } = useRouter();
 
