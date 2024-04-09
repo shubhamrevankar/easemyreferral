@@ -6,7 +6,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import GiverSession from './giver/page'
 import ReceiverSession from './receiver/page'
 
-const Session = ({ params }: { params: { sid: string } }) => {
+const Session = ({ params }:any) => {
 
 
     const [ role, setRole ] = useState("")

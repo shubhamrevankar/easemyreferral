@@ -6,7 +6,7 @@ import { answers } from "../../../../../constants";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useRouter } from "next/navigation";
 
-const GiverSession = ({sessionInfo}:{sessionInfo:any}) => {
+const GiverSession = ({sessionInfo}:any) => {
   const [gotThankYouNote, setGotThankYouNote] = useState(false);
 
   const [approved, setApproved] = useState(false);
