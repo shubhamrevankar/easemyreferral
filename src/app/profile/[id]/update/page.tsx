@@ -18,7 +18,7 @@ export default function UpdateProfile() {
 
     useEffect(()=>{
       setProfile(user)
-    },[])
+    },[user])
 
     // console.log(profile)
 

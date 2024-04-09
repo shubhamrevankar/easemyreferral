@@ -33,7 +33,7 @@ export default function UserSessions() {
           setLoading(false)
         })
 
-  },[])
+  },[user])
 
 
   // console.log(sessions)

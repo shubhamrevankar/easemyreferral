@@ -30,9 +30,23 @@ export default function Header() {
 
   const [navigation, setNavigation] = useState([
     { name: "Home", href: `/`, current: true },
-    { name: "Sessions", href: `/profile/${2}/sessions`, current: false },
+    { name: "Sessions", href: `/profile/${dbUser?.userId}/sessions`, current: false },
     { name: "AboutUs", href: `/aboutus`, current: false },
   ]);
+
+  useEffect(()=>{
+    setNavigation(
+      navigation.map((n) => {
+        if (n.name == "Sessions") {
+          return {
+            ...n,
+            href: `/profile/${dbUser?.userId}/sessions`,
+          };
+        }
+        else return n
+      })
+    )
+  },[dbUser])
 
   const pathname = usePathname();
   const searchParams = useSearchParams();
