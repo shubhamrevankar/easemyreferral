@@ -5,10 +5,11 @@ import Header from "@/components/Header";
 import { Suspense } from "react";
 import Loading from "./loading";
 import { ClerkProvider } from "@clerk/nextjs";
-import { ApolloProviders } from "@/providers/ApolloProvider";
+// import { ApolloProviders } from "@/providers/ApolloProvider";
 import UserProvider from "@/providers/UserProvider";
 import Footer from "@/components/Footer";
 import { EdgeStoreProvider } from "@/lib/edgestore";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,7 +33,7 @@ export default function RootLayout({
         />
       </head>
       <ClerkProvider>
-        <ApolloProviders>
+        {/* <ApolloProviders> */}
           <UserProvider>
             <EdgeStoreProvider>
               <body className={inter.className}>
@@ -42,10 +43,11 @@ export default function RootLayout({
                   <Suspense fallback={<Loading />}>{children}</Suspense>
                   <Footer />
                 </div>
+                <Toaster />
               </body>
             </EdgeStoreProvider>
           </UserProvider>
-        </ApolloProviders>
+        {/* </ApolloProviders> */}
       </ClerkProvider>
     </html>
   );
