@@ -43,7 +43,7 @@ const Session = ({ params }: { params: { sid: string } }) => {
             if(sessionInfo.giverUserEmail == user?.email){
                 return setRole("giver")
             }
-            else {
+            else if(sessionInfo.receiverUserEmail == user?.email) {
                 return setRole("receiver")
             }
         }
