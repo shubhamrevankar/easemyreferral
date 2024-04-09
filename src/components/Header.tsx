@@ -8,6 +8,7 @@ import { useUser } from "@clerk/nextjs";
 
 import { usePathname, useSearchParams } from "next/navigation";
 import { SignOutButton } from "@clerk/nextjs";
+import UserContext from "@/contexts/UserContext";
 // import UserContext from "@/contexts/UserContext";
 
 // const navigation = [
@@ -20,9 +21,8 @@ function classNames(...classes: string[]) {
 }
 
 export default function Header() {
-  // const demoUser = useContext(UserContext);
 
-  // console.log(demoUser);
+  const { user:dbUser } = useContext(UserContext);
 
   const { isLoaded, isSignedIn, user } = useUser();
 
@@ -188,7 +188,7 @@ export default function Header() {
                         <Menu.Item>
                           {({ active }) => (
                             <Link
-                              href={`/profile/${2}`}
+                              href={`/profile/${dbUser?.userId}`}
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"

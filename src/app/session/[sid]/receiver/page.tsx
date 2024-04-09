@@ -6,7 +6,7 @@ import { useState } from "react";
 import { questions } from "../../../../../constants";
 import * as Dialog from "@radix-ui/react-dialog";
 
-export default function Session() {
+export default function ReceiverSession({sessionInfo}:{sessionInfo:any}) {
   const [approved, setApproved] = useState(false);
 
   const [form, setForm] = useState(

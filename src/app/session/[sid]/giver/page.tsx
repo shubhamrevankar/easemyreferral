@@ -5,7 +5,7 @@ import { answers } from "../../../../../constants";
 
 import * as Dialog from "@radix-ui/react-dialog";
 
-const Session = () => {
+const GiverSession = ({sessionInfo}:{sessionInfo:any}) => {
   const [gotThankYouNote, setGotThankYouNote] = useState(false);
 
   const [approved, setApproved] = useState(false);
@@ -218,4 +218,4 @@ const Session = () => {
   );
 };
 
-export default Session;
+export default GiverSession;
