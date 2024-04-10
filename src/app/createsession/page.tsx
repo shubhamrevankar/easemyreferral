@@ -4,15 +4,26 @@ import UserContext from '@/contexts/UserContext';
 import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation';
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 export default function CreateSession() {
+
+  
+  const [ listCompanies, setListCompanies ] = useState([]);
 
   const { user } = useContext(UserContext);
 
   const { push } = useRouter();
 
   const [ loadCreate, setLoadCreate ] = useState(false);
+
+  useEffect(()=>{
+    fetch(`${process.env.GOOGLE_SHEETS_URL}?route=getAllCompanies`)
+    .then((res) => res.json())
+    .then((data) => {
+      setListCompanies(data)
+    })
+  },[])
 
 
     const [sessionForm, setSessionForm] = useState({
@@ -27,10 +38,9 @@ export default function CreateSession() {
         setLoadCreate(true)
         console.log(sessionForm)
 
-        fetch(`${process.env.GOOGLE_SHEETS_URL}?route=createSession&giverUserEmail=${sessionForm?.giversEmail}&receiverUserEmail=${user?.email}&company=${sessionForm?.company}`,{method: 'POST',})
+        fetch(`${process.env.GOOGLE_SHEETS_URL}?route=createSession&giverUserEmail=${sessionForm?.giversEmail}&receiverUserEmail=${user?.email}&company=${sessionForm?.company}&attachedResume=${user?.resumeUrl}`,{method: 'POST',})
         .then((res) => res.text())
         .then((data) => {
-          setLoadCreate(false)
           push(`/session/${data}`)
         })
 
@@ -39,7 +49,7 @@ export default function CreateSession() {
 
 
   return (
-    <form className='w-[80%] mx-auto my-10 bg-white p-10 rounded-3xl shadow-md'>
+    <form className='md:w-[80%] w-[95%] mx-auto my-10 bg-white p-10 rounded-3xl shadow-md'>
       <div className="space-y-12">
 
         <div className="border-b border-gray-900/10 pb-12">
@@ -93,14 +103,40 @@ export default function CreateSession() {
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                 >
                   <option>Select</option>
-                  <option>Google</option>
-                  <option>Microsoft</option>
-                  <option>Oracle</option>
-                  <option>Facebook</option>
-                  <option>Netflix</option>
+                  {
+                    listCompanies.map((c,i)=>(
+                      <option key={i}>{c}</option>
+                    ))
+                  }
                 </select>
               </div>
             </div>
+
+            <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200">
+                <svg
+                  aria-hidden="true"
+                  focusable="false"
+                  className="icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                  width="1em"
+                  height="1em"
+                >
+                  <path d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128z" />
+                </svg>
+                <h1 className="px-2 text-sm">Attached Resume</h1>
+                {
+                  user.resumeUrl ?
+                  <a
+                  href={user.resumeUrl} rel="noopener" target="_blank"
+                  className="flex items-center gap-2 px-3 py-1.5 text-sm text-indigo-600 duration-150 bg-indigo-50 rounded-lg hover:bg-indigo-100 active:bg-indigo-200"
+                >
+                  View
+                </a>
+                :
+                  <p>NA</p>
+                }
+              </div>
           </div>
         </div>
 
@@ -113,7 +149,7 @@ export default function CreateSession() {
         {
           loadCreate ?
           <button
-            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             Creating...
           </button>

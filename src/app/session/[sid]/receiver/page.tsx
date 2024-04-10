@@ -67,7 +67,7 @@ export default function ReceiverSession({sessionInfo}:any) {
     return (
       <div className="min-h-screen">
         <div className="container max-w-4xl px-6 py-10 mx-auto">
-        <form className="md:w-[100%] w-[80%] mx-auto my-10 bg-white p-10 rounded-3xl shadow-md">
+        <form className="w-[100%] mx-auto my-10 bg-white p-10 rounded-3xl shadow-md">
           <div className="space-y-12">
             <div className="border-b border-gray-900/10 pb-12">
               <h2 className="text-base font-semibold leading-7 text-gray-900">
@@ -134,6 +134,30 @@ export default function ReceiverSession({sessionInfo}:any) {
                     />
                   </div>
                 </div>
+
+                <div className="sm:col-span-3">
+                  <label
+                    htmlFor="last-name"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
+                    Attached Resume:
+                  </label>
+                  <div className="mt-2 w-16">
+                    {
+                      sessionInfo?.attachedResume ?
+                      <a
+                      href={sessionInfo?.attachedResume} rel="noopener" target="_blank"
+                      className="flex items-center gap-2 px-3 py-1.5 text-sm text-indigo-600 duration-150 bg-indigo-50 rounded-lg hover:bg-indigo-100 active:bg-indigo-200"
+                    >
+                      View
+                    </a>
+                    :
+                      <p>NA</p>
+                    }
+                  </div>
+                </div>
+
+
               </div>
             </div>
           </div>
@@ -252,7 +276,7 @@ export default function ReceiverSession({sessionInfo}:any) {
         </form>
       ) : (
         <>
-        <form className="md:w-[100%] w-[80%] mx-auto my-10 bg-white p-10 rounded-3xl shadow-md">
+        <form className="w-[100%] mx-auto my-10 bg-white p-10 rounded-3xl shadow-md">
           <div className="space-y-12">
             <div className="border-b border-gray-900/10 pb-12">
               <h2 className="text-base font-semibold leading-7 text-gray-900">
@@ -320,6 +344,28 @@ export default function ReceiverSession({sessionInfo}:any) {
                       value={sessionInfo?.company}
                       className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
+                  </div>
+                </div>
+
+                <div className="sm:col-span-3">
+                  <label
+                    htmlFor="last-name"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
+                    Attached Resume:
+                  </label>
+                  <div className="mt-2 w-16">
+                    {
+                      sessionInfo?.attachedResume ?
+                      <a
+                      href={sessionInfo?.attachedResume} rel="noopener" target="_blank"
+                      className="flex items-center gap-2 px-3 py-1.5 text-sm text-indigo-600 duration-150 bg-indigo-50 rounded-lg hover:bg-indigo-100 active:bg-indigo-200"
+                    >
+                      View
+                    </a>
+                    :
+                      <p>NA</p>
+                    }
                   </div>
                 </div>
 
@@ -419,6 +465,7 @@ export default function ReceiverSession({sessionInfo}:any) {
               </h1>
         }
             <div className="mt-12 space-y-8">
+            
               { sessionInfo?.formResponse && JSON.parse(sessionInfo?.formResponse)?.length !== 0 && (
                 JSON.parse(sessionInfo?.formResponse)?.map((a:any, i:any) => (
                   <div

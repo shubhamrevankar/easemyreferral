@@ -114,6 +114,30 @@ const GiverSession = ({sessionInfo}:any) => {
                         />
                       </div>
                     </div>
+
+                    <div className="sm:col-span-3">
+                  <label
+                    htmlFor="last-name"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
+                    Attached Resume:
+                  </label>
+                  <div className="mt-2 w-16">
+                    {
+                      sessionInfo?.attachedResume ?
+                      <a
+                      href={sessionInfo?.attachedResume} rel="noopener" target="_blank"
+                      className="flex items-center gap-2 px-3 py-1.5 text-sm text-indigo-600 duration-150 bg-indigo-50 rounded-lg hover:bg-indigo-100 active:bg-indigo-200"
+                    >
+                      View
+                    </a>
+                    :
+                      <p>NA</p>
+                    }
+                  </div>
+                </div>
+
+
                   </div>
                 </div>
               </div>
@@ -189,7 +213,29 @@ const GiverSession = ({sessionInfo}:any) => {
                       </div>
                     </div>
 
-                    <div className="sm:col-span-3 flex items-end justify-center">
+                    <div className="sm:col-span-3">
+                  <label
+                    htmlFor="last-name"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
+                    Attached Resume:
+                  </label>
+                  <div className="mt-2 w-16">
+                    {
+                      sessionInfo?.attachedResume ?
+                      <a
+                      href={sessionInfo?.attachedResume} rel="noopener" target="_blank"
+                      className="flex items-center gap-2 px-3 py-1.5 text-sm text-indigo-600 duration-150 bg-indigo-50 rounded-lg hover:bg-indigo-100 active:bg-indigo-200"
+                    >
+                      View
+                    </a>
+                    :
+                      <p>NA</p>
+                    }
+                  </div>
+                </div>
+
+                    <div className="sm:col-span-3 flex items-end">
                       {
                         approved ?
                       <div className="flex items-center px-4 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-green-600 rounded-lg focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
