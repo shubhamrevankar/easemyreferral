@@ -134,6 +134,30 @@ export default function ReceiverSession({sessionInfo}:any) {
                     />
                   </div>
                 </div>
+
+                <div className="sm:col-span-3">
+                  <label
+                    htmlFor="last-name"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
+                    Attached Resume:
+                  </label>
+                  <div className="mt-2 w-16">
+                    {
+                      sessionInfo?.attachedResume ?
+                      <a
+                      href={sessionInfo?.attachedResume} rel="noopener" target="_blank"
+                      className="flex items-center gap-2 px-3 py-1.5 text-sm text-indigo-600 duration-150 bg-indigo-50 rounded-lg hover:bg-indigo-100 active:bg-indigo-200"
+                    >
+                      View
+                    </a>
+                    :
+                      <p>NA</p>
+                    }
+                  </div>
+                </div>
+
+
               </div>
             </div>
           </div>
@@ -323,6 +347,28 @@ export default function ReceiverSession({sessionInfo}:any) {
                   </div>
                 </div>
 
+                <div className="sm:col-span-3">
+                  <label
+                    htmlFor="last-name"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
+                    Attached Resume:
+                  </label>
+                  <div className="mt-2 w-16">
+                    {
+                      sessionInfo?.attachedResume ?
+                      <a
+                      href={sessionInfo?.attachedResume} rel="noopener" target="_blank"
+                      className="flex items-center gap-2 px-3 py-1.5 text-sm text-indigo-600 duration-150 bg-indigo-50 rounded-lg hover:bg-indigo-100 active:bg-indigo-200"
+                    >
+                      View
+                    </a>
+                    :
+                      <p>NA</p>
+                    }
+                  </div>
+                </div>
+
                 {form?.map((q, index) => (
                   <div key={index} className="sm:col-span-6">
                     <label
@@ -419,6 +465,7 @@ export default function ReceiverSession({sessionInfo}:any) {
               </h1>
         }
             <div className="mt-12 space-y-8">
+            
               { sessionInfo?.formResponse && JSON.parse(sessionInfo?.formResponse)?.length !== 0 && (
                 JSON.parse(sessionInfo?.formResponse)?.map((a:any, i:any) => (
                   <div
