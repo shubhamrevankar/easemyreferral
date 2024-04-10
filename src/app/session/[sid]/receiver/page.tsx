@@ -67,7 +67,7 @@ export default function ReceiverSession({sessionInfo}:any) {
     return (
       <div className="min-h-screen">
         <div className="container max-w-4xl px-6 py-10 mx-auto">
-        <form className="md:w-[100%] w-[80%] mx-auto my-10 bg-white p-10 rounded-3xl shadow-md">
+        <form className="w-[100%] mx-auto my-10 bg-white p-10 rounded-3xl shadow-md">
           <div className="space-y-12">
             <div className="border-b border-gray-900/10 pb-12">
               <h2 className="text-base font-semibold leading-7 text-gray-900">
@@ -276,7 +276,7 @@ export default function ReceiverSession({sessionInfo}:any) {
         </form>
       ) : (
         <>
-        <form className="md:w-[100%] w-[80%] mx-auto my-10 bg-white p-10 rounded-3xl shadow-md">
+        <form className="w-[100%] mx-auto my-10 bg-white p-10 rounded-3xl shadow-md">
           <div className="space-y-12">
             <div className="border-b border-gray-900/10 pb-12">
               <h2 className="text-base font-semibold leading-7 text-gray-900">

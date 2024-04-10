@@ -49,7 +49,7 @@ export default function CreateSession() {
 
 
   return (
-    <form className='w-[80%] mx-auto my-10 bg-white p-10 rounded-3xl shadow-md'>
+    <form className='md:w-[80%] w-[95%] mx-auto my-10 bg-white p-10 rounded-3xl shadow-md'>
       <div className="space-y-12">
 
         <div className="border-b border-gray-900/10 pb-12">
