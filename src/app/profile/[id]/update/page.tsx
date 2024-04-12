@@ -11,6 +11,18 @@ export default function UpdateProfile() {
 
     const { user } = useContext(UserContext);
 
+    const [ listCompanies, setListCompanies ] = useState([]);
+
+
+    useEffect(()=>{
+      fetch(`${process.env.GOOGLE_SHEETS_URL}?route=getAllCompanies`)
+      .then((res) => res.json())
+      .then((data) => {
+        setListCompanies(data)
+      })
+    },[])
+
+
     const [loadSave,setLoadSave] = useState(false);
 
 
@@ -73,7 +85,7 @@ export default function UpdateProfile() {
 
 
   return (
-    <form className='lg:w-[60%] w-[80%] mx-auto my-10 bg-white p-10 rounded-3xl shadow-md'>
+    <form className='lg:w-[60%] md:w-[80%] w-[90%] mx-auto my-10 bg-white p-10 rounded-3xl shadow-md'>
       <div className="space-y-12">
 
         <div className="border-b border-gray-900/10 pb-12">
@@ -164,11 +176,11 @@ export default function UpdateProfile() {
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                 >
                   <option>Unemployed</option>
-                  <option>Google</option>
-                  <option>Microsoft</option>
-                  <option>Oracle</option>
-                  <option>Facebook</option>
-                  <option>Netflix</option>
+                  {
+                    listCompanies.map((c,i)=>(
+                      <option key={i}>{c}</option>
+                    ))
+                  }
                 </select>
               </div>
             </div>

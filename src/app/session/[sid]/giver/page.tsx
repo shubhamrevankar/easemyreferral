@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { answers } from "../../../../../constants";
 
+import { toast } from '@/components/ui/use-toast';
 import * as Dialog from "@radix-ui/react-dialog";
 import { useRouter } from "next/navigation";
 
@@ -23,6 +24,9 @@ const GiverSession = ({sessionInfo}:any) => {
     .then((res) => res.text())
     .then((data) => {
       // console.log(data)
+      toast({
+        title: "Referral Request Accepted",
+      })
       router.refresh();
     })
 
@@ -47,7 +51,7 @@ const GiverSession = ({sessionInfo}:any) => {
                 {sessionInfo?.thankuNote}
               </p>
             </div>
-            <form className="md:w-[60%] w-[80%] mx-auto mt-3 mb-10 bg-white p-10 rounded-3xl shadow-md">
+            <form className="md:w-[60%] w-[100%] mx-auto mt-3 mb-10 bg-white p-10 rounded-3xl shadow-md">
               <div className="space-y-12">
                 <div className="border-b border-gray-900/10 pb-12">
                   <h2 className="text-xl font-semibold leading-7 text-gray-900">

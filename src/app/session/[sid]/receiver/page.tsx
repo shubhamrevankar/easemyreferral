@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { questions } from "../../../../../constants";
 import * as Dialog from "@radix-ui/react-dialog";
+import { toast } from '@/components/ui/use-toast';
 
 export default function ReceiverSession({sessionInfo}:any) {
 
@@ -31,7 +32,12 @@ export default function ReceiverSession({sessionInfo}:any) {
 
   
   useEffect(()=>{
-    getCompanyQuestion()
+    if(sessionInfo?.formResponse!=""){
+      setForm(JSON.parse(sessionInfo?.formResponse))
+    }
+    else{
+      getCompanyQuestion()
+    }
   },[])
 
 
@@ -43,6 +49,9 @@ export default function ReceiverSession({sessionInfo}:any) {
     fetch(`${process.env.GOOGLE_SHEETS_URL}?route=updateSession&sessionId=${sessionInfo?.sessionId}&formResponse=${JSON.stringify(form)}`,{method: 'POST',})
     .then((res) => res.text())
     .then((data) => {
+      toast({
+        title: "Your response has submitted successfully",
+      })
       console.log(data)
     })
 
@@ -54,6 +63,9 @@ export default function ReceiverSession({sessionInfo}:any) {
     fetch(`${process.env.GOOGLE_SHEETS_URL}?route=addThankuNote&sessionId=${sessionInfo?.sessionId}&thankuNote=${thankuNote}`,{method: 'POST',})
     .then((res) => res.text())
     .then((data) => {
+      toast({
+        title: "Your Thankyou note has submitted successfully",
+      })
       console.log(data)
     })
 
@@ -276,7 +288,7 @@ export default function ReceiverSession({sessionInfo}:any) {
         </form>
       ) : (
         <>
-        <form className="w-[100%] mx-auto my-10 bg-white p-10 rounded-3xl shadow-md">
+        <form className="w-[100%] mx-auto mb-10 md:mt-10 bg-white p-10 rounded-3xl shadow-md">
           <div className="space-y-12">
             <div className="border-b border-gray-900/10 pb-12">
               <h2 className="text-base font-semibold leading-7 text-gray-900">
@@ -383,6 +395,7 @@ export default function ReceiverSession({sessionInfo}:any) {
                         name={`question${index}`}
                         id={`question${index}`}
                         autoComplete={`question${index}`}
+                        value={q.answer}
                         onChange={(event) => {
                           setForm(
                             form.map((f) => {
