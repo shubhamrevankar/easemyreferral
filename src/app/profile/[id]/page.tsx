@@ -31,7 +31,7 @@ const Profile = () => {
 
   return (
     <div className="w-full h-screen">
-          <div className="mx-auto mt-10 w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 pt-5">
+          <div className="mx-auto mt-10 w-[90%] max-w-sm overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 pt-5">
             <img
               className="object-center h-16 object-contain mx-auto rounded-full border border-black"
               src={user?.imageUrl || "https://cdn-icons-png.freepik.com/256/64/64572.png"}
