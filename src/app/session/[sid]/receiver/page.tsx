@@ -46,7 +46,7 @@ export default function ReceiverSession({sessionInfo}:any) {
   const handleSave = () => {
     // console.log(form);
 
-    fetch(`${process.env.GOOGLE_SHEETS_URL}?route=updateSession&sessionId=${sessionInfo?.sessionId}&formResponse=${JSON.stringify(form)}`,{method: 'POST',})
+    fetch(`${process.env.GOOGLE_SHEETS_URL}?route=updateSession&formResponse=${JSON.stringify(form)}&sessionId=${sessionInfo?.sessionId}`,{method: 'POST',})
     .then((res) => res.text())
     .then((data) => {
       toast({
@@ -60,7 +60,7 @@ export default function ReceiverSession({sessionInfo}:any) {
     // console.log(thankuNote);
 
     
-    fetch(`${process.env.GOOGLE_SHEETS_URL}?route=addThankuNote&sessionId=${sessionInfo?.sessionId}&thankuNote=${thankuNote}`,{method: 'POST',})
+    fetch(`${process.env.GOOGLE_SHEETS_URL}?route=addThankuNote&thankuNote=${thankuNote}&sessionId=${sessionInfo?.sessionId}`,{method: 'POST',})
     .then((res) => res.text())
     .then((data) => {
       toast({
@@ -477,7 +477,7 @@ export default function ReceiverSession({sessionInfo}:any) {
                 Your Submitted Response
               </h1>
         }
-            <div className="mt-12 space-y-8">
+            {/* <div className="mt-12 space-y-8">
             
               { sessionInfo?.formResponse && JSON.parse(sessionInfo?.formResponse)?.length !== 0 && (
                 JSON.parse(sessionInfo?.formResponse)?.map((a:any, i:any) => (
@@ -497,7 +497,7 @@ export default function ReceiverSession({sessionInfo}:any) {
                   </div>
                 ))
               )}
-            </div>
+            </div> */}
         </>
       )}
       </div>

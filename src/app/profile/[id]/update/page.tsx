@@ -232,6 +232,7 @@ export default function UpdateProfile() {
                         id="file-upload" 
                         name="file-upload" 
                         type="file" 
+                        accept=".pdf"
                         className="sr-only" 
                         onChange={event => setResume(event.target.files ? event.target.files[0] : null)} 
                         />
@@ -242,7 +243,7 @@ export default function UpdateProfile() {
                     resume?
                     resume.name
                     :
-                    <p className="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
+                    <p className="text-xs leading-5 text-gray-600">pdf up to 10MB</p>
                   }
                 </div>
               </div>
