@@ -390,8 +390,7 @@ export default function ReceiverSession({sessionInfo}:any) {
                       {q?.question}
                     </label>
                     <div className="mt-2">
-                      <input
-                        type="text"
+                      <textarea
                         name={`question${index}`}
                         id={`question${index}`}
                         autoComplete={`question${index}`}
@@ -477,7 +476,7 @@ export default function ReceiverSession({sessionInfo}:any) {
                 Your Submitted Response
               </h1>
         }
-            {/* <div className="mt-12 space-y-8">
+            <div className="mt-12 space-y-8">
             
               { sessionInfo?.formResponse && JSON.parse(sessionInfo?.formResponse)?.length !== 0 && (
                 JSON.parse(sessionInfo?.formResponse)?.map((a:any, i:any) => (
@@ -497,7 +496,7 @@ export default function ReceiverSession({sessionInfo}:any) {
                   </div>
                 ))
               )}
-            </div> */}
+            </div>
         </>
       )}
       </div>
