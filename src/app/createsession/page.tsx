@@ -5,6 +5,7 @@ import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation';
 import { useContext, useEffect, useState } from 'react'
+import { useEdgeStore } from '@/lib/edgestore';
 
 export default function CreateSession() {
 
@@ -46,6 +47,34 @@ export default function CreateSession() {
 
 
     }
+
+
+    const [resume, setResume] = useState<File | null>(null);
+
+    const { edgestore } = useEdgeStore();
+
+
+    const storeFile = async (resume: File) => {
+      const res = await edgestore.publicFiles.upload({
+        file: resume,
+        onProgressChange: (progress) => {
+          // you can use this to show a progress bar
+          // console.log(progress);
+        },
+      });
+
+      fetch(`${process.env.GOOGLE_SHEETS_URL}?route=updateUser&resumeUrl=${res.url}&userId=${user?.userId}`,{method: 'POST',})
+        .then((res) => res.text())
+        .then((data) => {
+          console.log("200")
+        })
+    }
+
+    useEffect(()=>{
+      if(resume){
+        storeFile(resume);
+      }
+    },[resume])
 
 
   return (
@@ -134,7 +163,36 @@ export default function CreateSession() {
                   View
                 </a>
                 :
-                  <p>NA</p>
+                <div className="text-center">
+                <PhotoIcon className="mx-auto h-12 w-12 text-gray-300" aria-hidden="true" />
+                <div className="mt-4 flex text-sm leading-6 text-gray-600">
+                  <label
+                    htmlFor="file-upload"
+                    className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
+                  >
+                    {
+                      resume?
+                      <span>Edit</span>
+                      :
+                      <span>Upload a file</span>
+                    }
+                    <input 
+                      id="file-upload" 
+                      name="file-upload" 
+                      type="file" 
+                      accept=".pdf"
+                      className="sr-only" 
+                      onChange={event => setResume(event.target.files ? event.target.files[0] : null)} 
+                      />
+                  </label>
+                </div>
+                {
+                  resume?
+                  resume.name
+                  :
+                  <p className="text-xs leading-5 text-gray-600">pdf up to 10MB</p>
+                }
+              </div>
                 }
               </div>
           </div>
