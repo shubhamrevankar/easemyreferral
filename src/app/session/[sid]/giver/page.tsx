@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { answers } from "../../../../../constants";
 
 import { toast } from '@/components/ui/use-toast';
@@ -11,6 +11,8 @@ const GiverSession = ({sessionInfo}:any) => {
   const [gotThankYouNote, setGotThankYouNote] = useState(false);
 
   const [approved, setApproved] = useState(false);
+
+  const [receiverResumeUrl, setReceiverResumeUrl] = useState("");
 
   const router = useRouter();
 
@@ -31,6 +33,16 @@ const GiverSession = ({sessionInfo}:any) => {
     })
 
   };
+
+
+  useEffect(()=>{
+    fetch(`${process.env.GOOGLE_SHEETS_URL}?route=getUserResume&sessionId=${sessionInfo?.receiverUserEmail}`)
+    .then((res) => res.json())
+    .then((data:any) => {
+      setReceiverResumeUrl(data?.resumeUrl)
+    })
+  },[])
+
 
   return (
     <section className="bg-white dark:bg-gray-900 min-h-[750px]">
@@ -128,9 +140,9 @@ const GiverSession = ({sessionInfo}:any) => {
                   </label>
                   <div className="mt-2 w-16">
                     {
-                      sessionInfo?.attachedResume ?
+                      receiverResumeUrl ?
                       <a
-                      href={sessionInfo?.attachedResume} rel="noopener" target="_blank"
+                      href={receiverResumeUrl} rel="noopener" target="_blank"
                       className="flex items-center gap-2 px-3 py-1.5 text-sm text-indigo-600 duration-150 bg-indigo-50 rounded-lg hover:bg-indigo-100 active:bg-indigo-200"
                     >
                       View
@@ -226,9 +238,9 @@ const GiverSession = ({sessionInfo}:any) => {
                   </label>
                   <div className="mt-2 w-16">
                     {
-                      sessionInfo?.attachedResume ?
+                      receiverResumeUrl ?
                       <a
-                      href={sessionInfo?.attachedResume} rel="noopener" target="_blank"
+                      href={receiverResumeUrl} rel="noopener" target="_blank"
                       className="flex items-center gap-2 px-3 py-1.5 text-sm text-indigo-600 duration-150 bg-indigo-50 rounded-lg hover:bg-indigo-100 active:bg-indigo-200"
                     >
                       View
@@ -236,6 +248,7 @@ const GiverSession = ({sessionInfo}:any) => {
                     :
                       <p>NA</p>
                     }
+                    
                   </div>
                 </div>
 
