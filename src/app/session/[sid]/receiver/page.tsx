@@ -2,12 +2,19 @@
 
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { questions } from "../../../../../constants";
 import * as Dialog from "@radix-ui/react-dialog";
 import { toast } from '@/components/ui/use-toast';
+import { useEdgeStore } from "@/lib/edgestore";
+import UserContext from "@/contexts/UserContext";
 
 export default function ReceiverSession({sessionInfo}:any) {
+
+
+
+  const { user } = useContext(UserContext);
+
 
   const [form, setForm] = useState([{
     id:1,
@@ -203,6 +210,37 @@ export default function ReceiverSession({sessionInfo}:any) {
     )
   }
 
+
+
+  const [resume, setResume] = useState<File | null>(null);
+
+  const [resumeUrl, setResumeUrl] = useState(user?.resumeUrl)
+
+    const { edgestore } = useEdgeStore();
+
+    const storeFile = async (resume: File) => {
+      const res = await edgestore.publicFiles.upload({
+        file: resume,
+      });
+      fetch(`${process.env.GOOGLE_SHEETS_URL}?route=updateUser&resumeUrl=${res?.url}&userId=${user?.userId}`,{method: 'POST',})
+        .then((res) => res.text())
+        .then((data) => {
+          toast({
+            title: "Resume Updated Successfully",
+          })
+          setResumeUrl(res?.url)
+        })
+    }
+
+    useEffect(()=>{
+      if(resume){
+        storeFile(resume);
+      }
+    },[resume])
+
+
+
+
   return (
     <div className="min-h-screen">
       <div className="container max-w-4xl px-6 py-10 mx-auto">
@@ -366,18 +404,56 @@ export default function ReceiverSession({sessionInfo}:any) {
                   >
                     Attached Resume:
                   </label>
-                  <div className="mt-2 w-16">
+                  <div className="mt-2 flex items-center gap-3">
+                  {
+                  resumeUrl ?
+                  <a
+                  href={resumeUrl} rel="noopener" target="_blank"
+                  className="flex items-center gap-2 px-3 py-1.5 text-sm text-indigo-600 duration-150 bg-indigo-50 rounded-lg hover:bg-indigo-100 active:bg-indigo-200"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width={24}
+                    height={24}
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="icon icon-tabler icons-tabler-outline icon-tabler-arrow-down"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M12 5l0 14" />
+                    <path d="M18 13l-6 6" />
+                    <path d="M6 13l6 6" />
+                  </svg>
+                  View
+                </a>
+                :
+                  <p>NA</p>
+                }
+                    <div className="flex text-sm leading-6 text-gray-600 items-center">
+                  <label
+                    htmlFor="file-upload"
+                    className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
+                  >
                     {
-                      sessionInfo?.attachedResume ?
-                      <a
-                      href={sessionInfo?.attachedResume} rel="noopener" target="_blank"
-                      className="flex items-center gap-2 px-3 py-1.5 text-sm text-indigo-600 duration-150 bg-indigo-50 rounded-lg hover:bg-indigo-100 active:bg-indigo-200"
-                    >
-                      View
-                    </a>
-                    :
-                      <p>NA</p>
+                      resumeUrl?
+                      <span>Edit</span>
+                      :
+                      <span>Upload a file</span>
                     }
+                    <input 
+                      id="file-upload" 
+                      name="file-upload" 
+                      type="file" 
+                      accept=".pdf"
+                      className="sr-only" 
+                      onChange={event => setResume(event.target.files ? event.target.files[0] : null)} 
+                      />
+                  </label>
+                </div>
                   </div>
                 </div>
 
