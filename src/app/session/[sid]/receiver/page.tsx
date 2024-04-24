@@ -82,133 +82,7 @@ export default function ReceiverSession({sessionInfo}:any) {
   // console.log(sessionInfo)
 
 
-  if(sessionInfo?.status==false){
-    return (
-      <div className="min-h-screen">
-        <div className="container max-w-4xl px-6 py-10 mx-auto">
-        <form className="w-[100%] mx-auto my-10 bg-white p-10 rounded-3xl shadow-md">
-          <div className="space-y-12">
-            <div className="border-b border-gray-900/10 pb-12">
-              <h2 className="text-base font-semibold leading-7 text-gray-900">
-                Session Closed
-              </h2>
-
-              <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                <div className="sm:col-span-4">
-                  <label
-                    htmlFor="last-name"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    You were seeking a referral from:
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      type="giversEmail"
-                      name="giversEmail"
-                      id="giversEmail"
-                      autoComplete="giversEmail"
-                      disabled
-                      value={sessionInfo?.giverUserEmail}
-                      className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
-                  </div>
-                </div>
-
-                {/* <div className="sm:col-span-3">
-                  <label
-                    htmlFor="last-name"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Referral Receiver&apos;s Email
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      type="receiversEmail"
-                      name="receiversEmail"
-                      id="receiversEmail"
-                      autoComplete="receiversEmail"
-                      disabled
-                      value="sample2@gmail.com"
-                      className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
-                  </div>
-                </div> */}
-
-                <div className="sm:col-span-3">
-                  <label
-                    htmlFor="last-name"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    For the Company:
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      type="company"
-                      name="company"
-                      id="company"
-                      autoComplete="company"
-                      disabled
-                      value={sessionInfo?.company}
-                      className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
-                  </div>
-                </div>
-
-                <div className="sm:col-span-3">
-                  <label
-                    htmlFor="last-name"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Attached Resume:
-                  </label>
-                  <div className="mt-2 w-16">
-                    {
-                      sessionInfo?.attachedResume ?
-                      <a
-                      href={sessionInfo?.attachedResume} rel="noopener" target="_blank"
-                      className="flex items-center gap-2 px-3 py-1.5 text-sm text-indigo-600 duration-150 bg-indigo-50 rounded-lg hover:bg-indigo-100 active:bg-indigo-200"
-                    >
-                      View
-                    </a>
-                    :
-                      <p>NA</p>
-                    }
-                  </div>
-                </div>
-
-
-              </div>
-            </div>
-          </div>
-
-        </form>
-        <h1 className="text-2xl font-semibold text-center text-gray-800 lg:text-3xl dark:text-white">
-                Your Submitted Response
-              </h1>
-              <div className="mt-12 space-y-8">
-              { sessionInfo?.formResponse && JSON.parse(sessionInfo?.formResponse)?.length !== 0 && (
-                JSON.parse(sessionInfo?.formResponse)?.map((a:any, i:any) => (
-                  <div
-                    key={i}
-                    className="border-2 border-gray-100 rounded-lg dark:border-gray-700"
-                  >
-                    <span className="flex items-center justify-between w-full p-8">
-                      <h1 className="font-semibold text-gray-700 dark:text-white">
-                        {a.question}
-                      </h1>
-                    </span>
-                    <hr className="border-gray-200 dark:border-gray-700" />
-                    <p className="p-8 text-sm text-gray-500 dark:text-gray-300">
-                      {a.answer}
-                    </p>
-                  </div>
-                ))
-              )}
-            </div>
-        </div>
-      </div>
-    )
-  }
+  
 
 
 
@@ -238,7 +112,133 @@ export default function ReceiverSession({sessionInfo}:any) {
       }
     },[resume])
 
-
+    if(sessionInfo?.status==false){
+      return (
+        <div className="min-h-screen">
+          <div className="container max-w-4xl px-6 py-10 mx-auto">
+          <form className="w-[100%] mx-auto my-10 bg-white p-10 rounded-3xl shadow-md">
+            <div className="space-y-12">
+              <div className="border-b border-gray-900/10 pb-12">
+                <h2 className="text-base font-semibold leading-7 text-gray-900">
+                  Session Closed
+                </h2>
+  
+                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                  <div className="sm:col-span-4">
+                    <label
+                      htmlFor="last-name"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      You were seeking a referral from:
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        type="giversEmail"
+                        name="giversEmail"
+                        id="giversEmail"
+                        autoComplete="giversEmail"
+                        disabled
+                        value={sessionInfo?.giverUserEmail}
+                        className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      />
+                    </div>
+                  </div>
+  
+                  {/* <div className="sm:col-span-3">
+                    <label
+                      htmlFor="last-name"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      Referral Receiver&apos;s Email
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        type="receiversEmail"
+                        name="receiversEmail"
+                        id="receiversEmail"
+                        autoComplete="receiversEmail"
+                        disabled
+                        value="sample2@gmail.com"
+                        className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      />
+                    </div>
+                  </div> */}
+  
+                  <div className="sm:col-span-3">
+                    <label
+                      htmlFor="last-name"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      For the Company:
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        type="company"
+                        name="company"
+                        id="company"
+                        autoComplete="company"
+                        disabled
+                        value={sessionInfo?.company}
+                        className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      />
+                    </div>
+                  </div>
+  
+                  <div className="sm:col-span-3">
+                    <label
+                      htmlFor="last-name"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      Attached Resume:
+                    </label>
+                    <div className="mt-2 w-16">
+                      {
+                        sessionInfo?.attachedResume ?
+                        <a
+                        href={sessionInfo?.attachedResume} rel="noopener" target="_blank"
+                        className="flex items-center gap-2 px-3 py-1.5 text-sm text-indigo-600 duration-150 bg-indigo-50 rounded-lg hover:bg-indigo-100 active:bg-indigo-200"
+                      >
+                        View
+                      </a>
+                      :
+                        <p>NA</p>
+                      }
+                    </div>
+                  </div>
+  
+  
+                </div>
+              </div>
+            </div>
+  
+          </form>
+          <h1 className="text-2xl font-semibold text-center text-gray-800 lg:text-3xl dark:text-white">
+                  Your Submitted Response
+                </h1>
+                <div className="mt-12 space-y-8">
+                { sessionInfo?.formResponse && JSON.parse(sessionInfo?.formResponse)?.length !== 0 && (
+                  JSON.parse(sessionInfo?.formResponse)?.map((a:any, i:any) => (
+                    <div
+                      key={i}
+                      className="border-2 border-gray-100 rounded-lg dark:border-gray-700"
+                    >
+                      <span className="flex items-center justify-between w-full p-8">
+                        <h1 className="font-semibold text-gray-700 dark:text-white">
+                          {a.question}
+                        </h1>
+                      </span>
+                      <hr className="border-gray-200 dark:border-gray-700" />
+                      <p className="p-8 text-sm text-gray-500 dark:text-gray-300">
+                        {a.answer}
+                      </p>
+                    </div>
+                  ))
+                )}
+              </div>
+          </div>
+        </div>
+      )
+    }
 
 
   return (
